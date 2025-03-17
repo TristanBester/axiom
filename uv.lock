@@ -25,6 +25,7 @@ version = "0.1.0"
 source = { editable = "." }
 dependencies = [
     { name = "chex" },
+    { name = "distrax" },
     { name = "flashbax" },
     { name = "flax" },
     { name = "jax" },
@@ -42,6 +43,7 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "chex", specifier = ">=0.1.89" },
+    { name = "distrax", specifier = ">=0.1.5" },
     { name = "flashbax", specifier = ">=0.1.2" },
     { name = "flax", specifier = ">=0.10.4" },
     { name = "jax", specifier = ">=0.5.2" },
@@ -153,6 +155,32 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/a9/95/a3dbbb5028f35eafb79008e7522a75244477d2838f38cbb722248dabc2a8/cycler-0.12.1.tar.gz", hash = "sha256:88bb128f02ba341da8ef447245a9e138fae777f6a23943da4540077d3601eb1c", size = 7615 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/e7/05/c19819d5e3d95294a6f5947fb9b9629efb316b96de511b418c53d245aae6/cycler-0.12.1-py3-none-any.whl", hash = "sha256:85cef7cff222d8644161529808465972e51340599459b8ac3ccbac5a854e0d30", size = 8321 },
+]
+
+[[package]]
+name = "decorator"
+version = "5.2.1"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/43/fa/6d96a0978d19e17b68d634497769987b16c8f4cd0a7a05048bec693caa6b/decorator-5.2.1.tar.gz", hash = "sha256:65f266143752f734b0a7cc83c46f4618af75b8c5911b00ccb61d0ac9b6da0360", size = 56711 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/4e/8c/f3147f5c4b73e7550fe5f9352eaa956ae838d5c51eb58e7a25b9f3e2643b/decorator-5.2.1-py3-none-any.whl", hash = "sha256:d316bb415a2d9e2d2b3abcc4084c6502fc09240e292cd76a76afc106a1c8e04a", size = 9190 },
+]
+
+[[package]]
+name = "distrax"
+version = "0.1.5"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "absl-py" },
+    { name = "chex" },
+    { name = "jax" },
+    { name = "jaxlib" },
+    { name = "numpy" },
+    { name = "tensorflow-probability" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/81/a7/d87f5c5caf2ae9e28a9f506274870c25eb7e38c1ce0a1b7b3696afc73ac9/distrax-0.1.5.tar.gz", hash = "sha256:ec41522d389af69efedc8d475a7e6d8f229429c00f2140dcd641feacf7e21948", size = 190162 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/d8/42/efa7985eefd516f273bc5557550539ebd687cc6a3a2a176d5e1f5b0398ca/distrax-0.1.5-py3-none-any.whl", hash = "sha256:5020f4b53a9a480d019c12e44292fbacb7de857cce478bc594dacf29519c61b7", size = 319716 },
 ]
 
 [[package]]
@@ -286,6 +314,15 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/34/f4/5721faf47b8c499e776bc34c6a8fc17efdf7fdef0b00f398128bc5dcb4ac/fsspec-2025.3.0.tar.gz", hash = "sha256:a935fd1ea872591f2b5148907d103488fc523295e6c64b835cfad8c3eca44972", size = 298491 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/56/53/eb690efa8513166adef3e0669afd31e95ffde69fb3c52ec2ac7223ed6018/fsspec-2025.3.0-py3-none-any.whl", hash = "sha256:efb87af3efa9103f94ca91a7f8cb7a4df91af9f74fc106c9c7ea0efd7277c1b3", size = 193615 },
+]
+
+[[package]]
+name = "gast"
+version = "0.6.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/3c/14/c566f5ca00c115db7725263408ff952b8ae6d6a4e792ef9c84e77d9af7a1/gast-0.6.0.tar.gz", hash = "sha256:88fc5300d32c7ac6ca7b515310862f71e6fdf2c029bbec7c66c0f5dd47b6b1fb", size = 27708 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/a3/61/8001b38461d751cd1a0c3a6ae84346796a5758123f3ed97a1b121dfbf4f3/gast-0.6.0-py3-none-any.whl", hash = "sha256:52b182313f7330389f72b069ba00f174cfe2a06411099547288839c6cbafbd54", size = 21173 },
 ]
 
 [[package]]
@@ -815,6 +852,23 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/94/e7/b2c673351809dca68a0e064b6af791aa332cf192da575fd474ed7d6f16a2/six-1.17.0.tar.gz", hash = "sha256:ff70335d468e7eb6ec65b95b99d3a2836546063f63acc5171de367e834932a81", size = 34031 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/b7/ce/149a00dd41f10bc29e5921b496af8b574d8413afcd5e30dfa0ed46c2cc5e/six-1.17.0-py2.py3-none-any.whl", hash = "sha256:4721f391ed90541fddacab5acf947aa0d3dc7d27b2e1e8eda2be8970586c3274", size = 11050 },
+]
+
+[[package]]
+name = "tensorflow-probability"
+version = "0.25.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "absl-py" },
+    { name = "cloudpickle" },
+    { name = "decorator" },
+    { name = "dm-tree" },
+    { name = "gast" },
+    { name = "numpy" },
+    { name = "six" },
+]
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/fe/b6/e116761ceeb880b7ad4c6a7e1203538754dd7dda42538f08d6daaf8dfa4d/tensorflow_probability-0.25.0-py2.py3-none-any.whl", hash = "sha256:f3f4d6431656c0122906888afe1b67b4400e82bd7f254b45b92e6c5b84ea8e3e", size = 6979403 },
 ]
 
 [[package]]
