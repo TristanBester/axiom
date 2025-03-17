@@ -38,6 +38,6 @@ def create_jumaji_environment(
     eval_env = FlattenAgentViewWrapper(eval_env)
 
     # Wrap training environment for auto-resetting & logging
-    train_env = AutoResetWrapper(train_env)
+    train_env = AutoResetWrapper(train_env, next_obs_in_extras=True)
     train_env = RecordEpisodeMetricsWrapper(train_env)
     return train_env, eval_env

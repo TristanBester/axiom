@@ -58,10 +58,13 @@ class FlattenAgentViewWrapper(Wrapper):
         flattened_agent_view = self._flatten_agent_view(original_agent_view)
 
         # Replace the agent_view in the TimeStep with the flattened agent_view
-        observation = timestep.observation.replace(agent_view=flattened_agent_view)
+        observation = timestep.observation._replace(agent_view=flattened_agent_view)
         timestep = timestep.replace(observation=observation)
         return timestep
 
     def _flatten_agent_view(self, agent_view: chex.Array) -> chex.Array:
-        flattened_agent_view = jnp.reshape(agent_view, (self._flattened_obs_shape,))
+        flattened_agent_view = jnp.reshape(
+            agent_view,
+            self._flattened_obs_shape,
+        )
         return flattened_agent_view.astype(jnp.float32)

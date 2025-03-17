@@ -98,7 +98,7 @@ class JumanjiToAxiomWrapper(Wrapper):
 
     def _get_agent_view(self, timestep: TimeStep[Observation]) -> chex.Array:
         if self.observation_attribute is not None:
-            return timestep.observation._asdict()[self._observation_attribute].astype(  # type: ignore
+            return timestep.observation._asdict()[self.observation_attribute].astype(  # type: ignore
                 jnp.float32
             )  # type: ignore
         else:

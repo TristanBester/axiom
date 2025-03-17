@@ -24,7 +24,7 @@ class RecordEpisodeMetricsWrapper(Wrapper):
         state = RecordEpisodeMetricsState(
             env_state=state,
         )
-        timestep.extras["episode_metrics"] = {
+        timestep.extras["episode_statistics"] = {
             "episode_return": jnp.array(0.0, dtype=float),
             "episode_length": jnp.array(0, dtype=int),
             "is_terminal_step": jnp.array(False, dtype=bool),
@@ -35,7 +35,7 @@ class RecordEpisodeMetricsWrapper(Wrapper):
         self, state: RecordEpisodeMetricsState, action: chex.Array
     ) -> tuple[RecordEpisodeMetricsState, TimeStep]:
         """Step the environment with the given action."""
-        state, timestep = self._env.step(state.env_state, action)
+        env_state, timestep = self._env.step(state.env_state, action)
 
         # Update temporary variables
         curr_episode_return = state.curr_episode_return + timestep.reward
@@ -50,14 +50,14 @@ class RecordEpisodeMetricsWrapper(Wrapper):
         )
 
         # Add episode metrics to the timestep extra information
-        timestep.extras["episode_metrics"] = {
+        timestep.extras["episode_statistics"] = {
             "episode_return": episode_return,
             "episode_length": episode_length,
             "is_terminal_step": timestep.last(),
         }
 
         state = RecordEpisodeMetricsState(
-            env_state=state,
+            env_state=env_state,
             curr_episode_return=curr_episode_return,
             curr_episode_length=curr_episode_length,
             episode_return=episode_return,

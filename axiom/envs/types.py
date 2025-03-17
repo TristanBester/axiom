@@ -1,16 +1,16 @@
+from typing import NamedTuple
+
 import chex
 from jumanji.env import State
 
 
-@chex.dataclass
-class AxiomObservation:
+class AxiomObservation(NamedTuple):
     agent_view: chex.Array
     action_mask: chex.Array
     step_count: chex.Numeric
 
 
-@chex.dataclass
-class RecordEpisodeMetricsState:
+class RecordEpisodeMetricsState(NamedTuple):
     """State of the `LogWrapper`."""
 
     env_state: State
