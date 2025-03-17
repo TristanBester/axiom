@@ -25,10 +25,12 @@ version = "0.1.0"
 source = { editable = "." }
 dependencies = [
     { name = "chex" },
+    { name = "flashbax" },
     { name = "flax" },
     { name = "jax" },
     { name = "jumanji" },
     { name = "optax" },
+    { name = "setuptools" },
 ]
 
 [package.dev-dependencies]
@@ -40,10 +42,12 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "chex", specifier = ">=0.1.89" },
+    { name = "flashbax", specifier = ">=0.1.2" },
     { name = "flax", specifier = ">=0.10.4" },
     { name = "jax", specifier = ">=0.5.2" },
     { name = "jumanji", specifier = ">=1.1.0" },
     { name = "optax", specifier = ">=0.2.4" },
+    { name = "setuptools", specifier = ">=76.0.0" },
 ]
 
 [package.metadata.requires-dev]
@@ -218,6 +222,24 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/0a/10/c23352565a6544bdc5353e0b15fc1c563352101f30e24bf500207a54df9a/filelock-3.18.0.tar.gz", hash = "sha256:adbc88eabb99d2fec8c9c1b229b171f18afa655400173ddc653d5d01501fb9f2", size = 18075 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/4d/36/2a115987e2d8c300a974597416d9de88f2444426de9571f4b59b2cca3acc/filelock-3.18.0-py3-none-any.whl", hash = "sha256:c401f4f8377c4464e6db25fff06205fd89bdd83b65eb0488ed1b160f780e21de", size = 16215 },
+]
+
+[[package]]
+name = "flashbax"
+version = "0.1.2"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "chex" },
+    { name = "flax" },
+    { name = "jax" },
+    { name = "jaxlib" },
+    { name = "numpy" },
+    { name = "tensorstore" },
+    { name = "typing-extensions" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/d5/24/3516275ee641b7c08d56a02c3a61554e172356c381bbe883ab8e74cd0d45/flashbax-0.1.2.tar.gz", hash = "sha256:b566ac5a78975b3e0a0a404a8844a26aa45e9cacfaad2829dcbcac2ffb3d5f7a", size = 51639 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/29/c6/4121dd95cb801f994c35b04b7569537210090b09838c87893f36afac21a7/flashbax-0.1.2-py3-none-any.whl", hash = "sha256:ac50b2580808ce63787da0ae240db14986e3404ade98a33335e6d7a5efe84859", size = 73014 },
 ]
 
 [[package]]
@@ -753,6 +775,15 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/3d/74/c2d8a24d18acdeae69ed02e132b9bc1bb67b7bee90feee1afe05a68f9d67/scipy-1.15.2-cp310-cp310-musllinux_1_2_aarch64.whl", hash = "sha256:888307125ea0c4466287191e5606a2c910963405ce9671448ff9c81c53f85f58", size = 37230048 },
     { url = "https://files.pythonhosted.org/packages/42/19/0aa4ce80eca82d487987eff0bc754f014dec10d20de2f66754fa4ea70204/scipy-1.15.2-cp310-cp310-musllinux_1_2_x86_64.whl", hash = "sha256:9412f5e408b397ff5641080ed1e798623dbe1ec0d78e72c9eca8992976fa65aa", size = 40010322 },
     { url = "https://files.pythonhosted.org/packages/d0/d2/f0683b7e992be44d1475cc144d1f1eeae63c73a14f862974b4db64af635e/scipy-1.15.2-cp310-cp310-win_amd64.whl", hash = "sha256:b5e025e903b4f166ea03b109bb241355b9c42c279ea694d8864d033727205e65", size = 41233385 },
+]
+
+[[package]]
+name = "setuptools"
+version = "76.0.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/32/d2/7b171caf085ba0d40d8391f54e1c75a1cda9255f542becf84575cfd8a732/setuptools-76.0.0.tar.gz", hash = "sha256:43b4ee60e10b0d0ee98ad11918e114c70701bc6051662a9a675a0496c1a158f4", size = 1349387 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/37/66/d2d7e6ad554f3a7c7297c3f8ef6e22643ad3d35ef5c63bf488bc89f32f31/setuptools-76.0.0-py3-none-any.whl", hash = "sha256:199466a166ff664970d0ee145839f5582cb9bca7a0a3a2e795b6a9cb2308e9c6", size = 1236106 },
 ]
 
 [[package]]
