@@ -1,0 +1,10 @@
+{
+  "venvPath": ".",
+  "venv": ".venv",
+  "reportOptionalSubscript": false,
+  "reportAttributeAccessIssue": false,
+  "reportOptionalMemberAccess": false,
+  "reportPrivateImportUsage": false,
+  "reportInvalidTypeVarUse": false,
+  "reportGeneralTypeIssues": false
+}
