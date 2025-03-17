@@ -1,0 +1,26 @@
+[project]
+name = "axiom"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10,<3.11"
+dependencies = [
+    "chex>=0.1.89",
+    "flax>=0.10.4",
+    "jax>=0.5.2",
+    "jumanji>=1.1.0",
+    "optax>=0.2.4",
+]
+
+[build-system]
+build-backend = "hatchling.build"
+requires = ["hatchling"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["axiom"]
+
+[dependency-groups]
+dev = [
+    "pyright>=1.1.396",
+    "ruff>=0.11.0",
+]
