@@ -1,3 +1,5 @@
+from typing import Callable
+
 import jax
 from jumanji.env import Environment
 
@@ -10,9 +12,10 @@ from axiom.networks.actor import ActorFn
 def rollout(
     env: Environment,
     actor_fn: ActorFn,
+    buffer_add_fn: Callable,
     dqn_agent_state: DQNAgentState,
     num_steps: int,
-) -> tuple[DQNAgentState, Transition]:
+) -> DQNAgentState:
     """Rollout the environment for a given number of steps."""
     # Create a step function
     step_env_fn = create_step_env_fn(env, actor_fn, dqn_agent_state)
@@ -23,10 +26,16 @@ def rollout(
         step_env_fn, carry, None, length=num_steps
     )
 
+    breakpoint()
+
+    # Add the transitions to the buffer
+    buffer_state = buffer_add_fn(dqn_agent_state.buffer_state, transitions)
+
     # Update the DQNAgentState
     dqn_agent_state = dqn_agent_state._replace(
         env_state=state,
+        buffer_state=buffer_state,
         timestep=timestep,
         key=key,
     )
-    return dqn_agent_state, transitions
+    return dqn_agent_state
