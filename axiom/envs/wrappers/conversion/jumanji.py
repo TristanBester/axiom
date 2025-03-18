@@ -81,7 +81,7 @@ class JumanjiToAxiomWrapper(Wrapper):
         )
 
         # Compute step_count spec
-        step_count_spec = Array(shape=(1,), dtype=jnp.int32, name="step_count")
+        step_count_spec = Array(shape=(), dtype=jnp.int32, name="step_count")
         return Spec(
             constructor=AxiomObservation,
             name="AxiomObservationSpec",

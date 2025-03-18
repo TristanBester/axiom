@@ -91,59 +91,29 @@ def main():
     env_states, timesteps = jax.vmap(train_env.reset, in_axes=(0,))(subkeys)
 
     # BUFFER
-    # init_obs = train_env.observation_spec.generate_value()
-
-    # buffer = fbx.make_item_buffer(
-    #     max_length=100_000,
-    #     min_length=32,
-    #     sample_batch_size=32,
-    #     add_sequences=True,
-    #     add_batches=True,
-    # )
-    # buffer = buffer.replace(
-    #     init=jax.jit(buffer.init),
-    #     add=jax.jit(buffer.add, donate_argnums=0),
-    #     sample=jax.jit(buffer.sample),
-    #     can_sample=jax.jit(buffer.can_sample),
-    # )
-
-    # # Initialize buffer functions and state
-    # buffer_state = buffer.init(
-    #     Transition(
-    #         obs=init_obs,
-    #         action=jnp.zeros((), dtype=jnp.int32),
-    #         next_obs=init_obs,
-    #         reward=jnp.zeros((), dtype=jnp.float32),
-    #         done=jnp.zeros((), dtype=jnp.bool_),
-    #         info={
-    #             "episode_return": 0.0,
-    #             "episode_length": 0,
-    #             "is_terminal_step": False,
-    #         },
-    #     )
-    # )
+    init_obs = train_env.observation_spec.generate_value()
 
     buffer = fbx.make_item_buffer(
-        max_length=1000,
-        min_length=10,
+        max_length=100_000,
+        min_length=32,
         sample_batch_size=32,
         add_sequences=True,
         add_batches=True,
     )
-
-    init_obs = AxiomObservation(
-        agent_view=jnp.zeros((180,), dtype=jnp.float32),
-        action_mask=jnp.zeros((4,), dtype=jnp.float32),
-        step_count=jnp.zeros((), dtype=jnp.int32),
+    buffer = buffer.replace(
+        init=jax.jit(buffer.init),
+        add=jax.jit(buffer.add, donate_argnums=0),
+        sample=jax.jit(buffer.sample),
+        can_sample=jax.jit(buffer.can_sample),
     )
 
-    # Initialize the buffer with a dummy transition
+    # Initialize buffer functions and state
     buffer_state = buffer.init(
         Transition(
             obs=init_obs,
             action=jnp.zeros((), dtype=jnp.int32),
-            reward=jnp.zeros((), dtype=jnp.float32),
             next_obs=init_obs,
+            reward=jnp.zeros((), dtype=jnp.float32),
             done=jnp.zeros((), dtype=jnp.bool_),
             info={
                 "episode_return": 0.0,
