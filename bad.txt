@@ -1,0 +1,12 @@
+(10, 5, 180) agent_view
+(10, 5, 4) action_mask
+(10, 5) step_count
+(10, 5) action
+(10, 5) reward 
+(10, 5) done
+(10, 5, 180) agent_view
+(10, 5, 4) action_mask
+(10, 5) step_count
+(10, 5) info1
+(10, 5) info2
+(10, 5) info3

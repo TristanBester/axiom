@@ -2,11 +2,13 @@ from typing import NamedTuple
 
 import chex
 
+from axiom.envs.types import AxiomObservation
+
 
 class Transition(NamedTuple):
-    obs: chex.Array
+    obs: AxiomObservation
     action: chex.Array
     reward: chex.Array
     done: chex.Array
-    next_obs: chex.Array
+    next_obs: AxiomObservation
     info: dict
