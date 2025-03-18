@@ -15,7 +15,11 @@ def rollout(
     dqn_agent_state: DQNAgentState,
     num_steps: int,
 ) -> DQNAgentState:
-    """Rollout the environment for a given number of steps."""
+    """Rollout the environment for a given number of steps.
+
+    NOTE: Environment states and timesteps (in dqn_agent_state) must have
+    a batch dimension as the environment step is interally vmapped.
+    """
     # Create a step function
     step_env_fn = create_step_env_fn(env, actor_fn, dqn_agent_state)
 
