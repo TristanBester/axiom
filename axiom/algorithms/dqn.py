@@ -6,6 +6,7 @@ import jax.numpy as jnp
 from axiom.algorithms.factories import buffer_factory, network_factory, optim_factory
 from axiom.algorithms.rollout.rollout import rollout
 from axiom.algorithms.types import DQNAgentState
+from axiom.algorithms.utils import compute_episode_statistics
 from axiom.envs.factories import create_jumaji_environment
 
 NUM_ENVS = 5
@@ -46,13 +47,14 @@ def main():
     )
 
     # ROLLOUT
-    dqn_agent_state = rollout(
+    dqn_agent_state, statistics = rollout(
         env=train_env,
         actor_fn=actor_fn,
         buffer_add_fn=buffer.add,
         dqn_agent_state=dqn_agent_state,
         num_steps=SEQUENCE_LENGTH,
     )
+    statistics = compute_episode_statistics(statistics)
 
 
 if __name__ == "__main__":

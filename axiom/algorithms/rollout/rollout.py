@@ -14,11 +14,15 @@ def rollout(
     buffer_add_fn: Callable,
     dqn_agent_state: DQNAgentState,
     num_steps: int,
-) -> DQNAgentState:
+) -> tuple[DQNAgentState, dict]:
     """Rollout the environment for a given number of steps.
 
     NOTE: Environment states and timesteps (in dqn_agent_state) must have
     a batch dimension as the environment step is interally vmapped.
+
+    Returns:
+        dqn_agent_state: The updated DQNAgentState.
+        info: The episode statistics from the transitions.
     """
     # Create a step function
     step_env_fn = create_step_env_fn(env, actor_fn, dqn_agent_state)
@@ -39,4 +43,4 @@ def rollout(
         timestep=timestep,
         key=key,
     )
-    return dqn_agent_state
+    return dqn_agent_state, transitions.info
