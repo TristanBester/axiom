@@ -18,6 +18,6 @@ def train_epoch(
     train_step_fn = create_train_step(
         buffer_sample_fn, actor_fn, optim_fn, dqn_agent_state
     )
-    _, losses = jax.lax.scan(train_step_fn, dqn_agent_state, None, length=100)
+    _, losses = jax.lax.scan(train_step_fn, dqn_agent_state, None, length=10)
     ave_loss = jnp.mean(losses)
     return dqn_agent_state, ave_loss

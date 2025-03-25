@@ -12,8 +12,8 @@ def buffer_factory(env: Environment):
 
     buffer = fbx.make_item_buffer(
         max_length=100_000,
-        min_length=32,
-        sample_batch_size=32,
+        min_length=512,
+        sample_batch_size=512,
         add_sequences=True,
         add_batches=True,
     )

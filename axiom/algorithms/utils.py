@@ -1,3 +1,4 @@
+import jax
 import jax.numpy as jnp
 
 
@@ -32,3 +33,24 @@ def compute_episode_statistics(statistics: dict) -> dict:
         "avg_episode_length": avg_length,
         "num_episodes": num_terminal_steps,
     }
+
+
+# def compute_episode_statistics(metrics):
+#     """Get the metrics for the final step of an episode and check if th.
+
+#     Note: this is not a jittable method. We need to return variable length arrays, since
+#     we don't know how many episodes have been run. This is done since the logger
+#     expects arrays for computing summary statistics on the episode metrics.
+#     """
+#     is_final_ep = metrics.pop("is_terminal_step")
+#     has_final_ep_step = bool(jnp.any(is_final_ep))
+
+#     # If it didn't make it to the final step, return zeros.
+#     if not has_final_ep_step:
+#         final_metrics = jax.tree_util.tree_map(jnp.zeros_like, metrics)
+#     else:
+#         final_metrics = jax.tree_util.tree_map(lambda x: x[is_final_ep], metrics)
+
+#     # breakpoint()
+
+#     return final_metrics, has_final_ep_step

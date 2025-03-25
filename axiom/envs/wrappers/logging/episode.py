@@ -20,9 +20,11 @@ class RecordEpisodeMetricsWrapper(Wrapper):
 
     def reset(self, key: chex.PRNGKey) -> tuple[RecordEpisodeMetricsState, TimeStep]:
         """Reset the environment and initialise the temporary variables."""
-        state, timestep = self._env.reset(key)
+        key, subkey = jax.random.split(key)
+        state, timestep = self._env.reset(subkey)
         state = RecordEpisodeMetricsState(
             env_state=state,
+            key=key,
         )
         timestep.extras["episode_statistics"] = {
             "episode_return": jnp.array(0.0, dtype=float),
@@ -41,26 +43,17 @@ class RecordEpisodeMetricsWrapper(Wrapper):
         curr_episode_return = state.curr_episode_return + timestep.reward
         curr_episode_length = state.curr_episode_length + 1
 
-        # Persist previous episode metrics until current episode is done
-        episode_return = jax.lax.select(
-            timestep.last(), curr_episode_return, state.episode_return
-        )
-        episode_length = jax.lax.select(
-            timestep.last(), curr_episode_length, state.episode_length
-        )
-
         # Add episode metrics to the timestep extra information
         timestep.extras["episode_statistics"] = {
-            "episode_return": episode_return,
-            "episode_length": episode_length,
+            "episode_return": curr_episode_return,
+            "episode_length": curr_episode_length,
             "is_terminal_step": timestep.last(),
         }
 
         state = RecordEpisodeMetricsState(
             env_state=env_state,
+            key=state.key,
             curr_episode_return=curr_episode_return,
             curr_episode_length=curr_episode_length,
-            episode_return=episode_return,
-            episode_length=episode_length,
         )
         return state, timestep

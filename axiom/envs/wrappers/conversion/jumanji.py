@@ -54,7 +54,7 @@ class JumanjiToAxiomWrapper(Wrapper):
         )
 
         extras = timestep.extras if timestep.extras is not None else {}
-        timestep = timestep.replace(observation=obs, extras=extras)  # type: ignore
+        timestep = timestep.replace(observation=obs, extras=extras)
         return state, timestep
 
     @cached_property

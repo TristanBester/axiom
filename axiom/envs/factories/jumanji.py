@@ -1,6 +1,6 @@
 import jumanji
 from jumanji.env import Environment
-from jumanji.wrappers import AutoResetWrapper
+from jumanji.wrappers import VmapAutoResetWrapper
 
 from axiom.envs.wrappers.conversion import JumanjiToAxiomWrapper
 from axiom.envs.wrappers.logging import RecordEpisodeMetricsWrapper
@@ -38,6 +38,8 @@ def create_jumaji_environment(
     eval_env = FlattenAgentViewWrapper(eval_env)
 
     # Wrap training environment for auto-resetting & logging
-    train_env = AutoResetWrapper(train_env, next_obs_in_extras=True)
+    # NOTE: Metrics logger must be applied before auto-resetting wrapper or
+    # the episode metrics will not be automatically reset
     train_env = RecordEpisodeMetricsWrapper(train_env)
+    train_env = VmapAutoResetWrapper(train_env, next_obs_in_extras=True)
     return train_env, eval_env

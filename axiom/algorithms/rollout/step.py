@@ -3,7 +3,7 @@ from typing import Any, Callable
 import chex
 import jax
 from jumanji.env import Environment, TimeStep
-from jumanji.wrappers import AutoResetWrapper
+from jumanji.wrappers import VmapAutoResetWrapper
 
 from axiom.algorithms.rollout.types import Transition
 from axiom.algorithms.types import DQNAgentState
@@ -19,15 +19,12 @@ def create_step_env_fn(
 
     This function should be used with jax.lax.scan to step the environment.
     """
-    assert _has_wrapper(env, AutoResetWrapper), (
-        "Environment must be wrapped with AutoResetWrapper."
+    assert _has_wrapper(env, VmapAutoResetWrapper), (
+        "Environment must be wrapped with VmapAutoResetWrapper."
     )
     assert _has_wrapper(env, RecordEpisodeMetricsWrapper), (
         "Environment must be wrapped with RecordEpisodeMetricsWrapper."
     )
-
-    # Create a vmap of the step function
-    vmap_step = jax.vmap(env.step, in_axes=(0, 0))
 
     def _step_env(
         carry: tuple[RecordEpisodeMetricsState, TimeStep, chex.PRNGKey], _: Any
@@ -38,10 +35,13 @@ def create_step_env_fn(
         # Select an action
         key, subkey = jax.random.split(key)
         action_dist = actor_fn(dqn_agent_state.q_network_params, timestep.observation)
+        action_dist._preferences = (
+            action_dist.preferences * timestep.observation.action_mask
+        )
         action = action_dist.sample(seed=subkey)
 
         # Step the environment
-        state, timestep = vmap_step(state, action)
+        state, timestep = env.step(state, action)
 
         # Create a transition
         transition = _create_transition(timestep, action)
